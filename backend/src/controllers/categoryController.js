@@ -11,6 +11,8 @@ exports.getAllCategories = async (req, res) => {
   }
 };
 
+
+
 // Controlador para obtener una categoría por ID
 exports.getCategoryById = async (req, res) => {
   try {
