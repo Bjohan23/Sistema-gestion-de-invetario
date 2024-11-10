@@ -43,9 +43,9 @@ exports.registerCategory = async (req, res) => {
 exports.updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description } = req.body;
+    const { nombre,descripcion } = req.body;
 
-    const updatedCategory = await categoryService.updateCategoria(id, { name, description });
+    const updatedCategory = await categoryService.updateCategoria(id, { nombre,descripcion });
     return sendSuccess(res, updatedCategory, "Categoría actualizada con éxito");
   } catch (error) {
     return sendError(res, 500, "Error al actualizar la categoría: " + error.message);
