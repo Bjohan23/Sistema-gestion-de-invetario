@@ -9,8 +9,8 @@ const getUserById = async (id) => {
   return await userRepository.findById(id);
 };
 
-const updateUser = async (id , user )=>{
-  return await userRepository.update(id,user);
+const updateUser = async (id , userData )=>{
+  return await userRepository.update(id,userData);
 }
 
 const deleteUser = async (id)=>{

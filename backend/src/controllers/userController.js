@@ -44,8 +44,8 @@ exports.registerUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = req.body;
-    const updatedUser = await userService.updateUser(id, user);
+    const {descripcion, nombre} = req.body;
+    const updatedUser = await userService.updateUser(id, {descripcion, nombre});
     return sendSuccess(res, updatedUser, "usuario actualizado con éxito");
   }catch(error){
     return sendError(res,500,error.message);
