@@ -1,10 +1,10 @@
 const { sendSuccess, sendError } = require("../utils/responseHelper");
-const inventoryMovementService = require("../services/InventoryMovementServices");
+const inventoryMovementService = require("../services/InventoryMovimentsService");
 
 // Controlador para obtener todos los movimientos de inventario
 exports.getAllInventoryMovements = async (req, res) => {
   try {
-    const movements = await inventoryMovementService.getAllInventoryMovements();
+    const movements = await inventoryMovementService.getAllMovimientos();
     return sendSuccess(res, movements);
   } catch (error) {
     return sendError(res, 500, "Error al obtener los movimientos de inventario: " + error.message);
@@ -15,7 +15,7 @@ exports.getAllInventoryMovements = async (req, res) => {
 exports.getInventoryMovementById = async (req, res) => {
   try {
     const { id } = req.params;
-    const movement = await inventoryMovementService.getInventoryMovementById(id);
+    const movement = await inventoryMovementService.getMovimientoById(id);
 
     if (!movement) {
       return sendError(res, 404, "Movimiento de inventario no encontrado");
@@ -32,7 +32,7 @@ exports.registerInventoryMovement = async (req, res) => {
   try {
     const { productId, quantity, movementType, description } = req.body;
 
-    const newMovement = await inventoryMovementService.createInventoryMovement({
+    const newMovement = await inventoryMovementService.createMovimiento({
       productId,
       quantity,
       movementType,

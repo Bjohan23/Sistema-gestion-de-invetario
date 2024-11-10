@@ -27,14 +27,49 @@ exports.getProductById = async (req, res) => {
   }
 };
 
-// Controlador para registrar un producto
+
 exports.registerProduct = async (req, res) => {
   try {
-    const { name, price } = req.body;
+    const { categoria_id, nombre, descripcion,precio,stock } = req.body;
 
-    const newProduct = await productService.createProduct({ name, price });
+    const newProduct = await productService.createProducto({ categoria_id, nombre,descripcion, precio, stock });
     return sendSuccess(res, newProduct, "Producto registrado con éxito");
   } catch (error) {
     return sendError(res, 500, "Error al registrar el producto: " + error.message);
+  }
+};
+
+
+exports.updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { categoria_id, nombre, descripcion, precio, stock } = req.body;
+
+    const updatedProduct = await productService.updateProduct(id, { categoria_id, nombre, descripcion, precio, stock });
+    
+    if (!updatedProduct) {
+      return sendError(res, 404, "Producto no encontrado");
+    }
+
+    return sendSuccess(res, updatedProduct, "Producto actualizado con éxito");
+  } catch (error) {
+    return sendError(res, 500, "Error al actualizar el producto: " + error.message);
+  }
+};
+
+
+exports.deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedProduct = await productService.deleteProduct(id);
+    
+    if (!deletedProduct) {
+      return sendError(res, 404, "Producto no encontrado");
+    }
+
+    return sendSuccess(res, null, "Producto eliminado con éxito");
+  } catch (error) {
+    return sendError(res, 500, "Error al eliminar el producto: " + error.message);
   }
 };

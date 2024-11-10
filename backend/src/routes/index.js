@@ -3,7 +3,7 @@ const AuthController = require("../controllers/AuthController");
 const usuarioRoutes = require("./usuarioRoutes");
 const authMiddleware = require("../middlewares/authMiddleware");
 const categoriaRoutes = require("./categoriaRoutes");
-//const productoRoutes = require("./");
+const productoRoutes = require("./productoRoutes");
 
 const authRoutes = require("./authRoutes");
 const router = express.Router();
@@ -20,5 +20,6 @@ router.use(authMiddleware);
 
 // Rutas protegidas
 router.use("/usuarios", usuarioRoutes);
-router.use("/categorias", categoriaRoutes)
+router.use("/categorias", categoriaRoutes);
+router.use("/productos" ,productoRoutes);
 module.exports = router;
