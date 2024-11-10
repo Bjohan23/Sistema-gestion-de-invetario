@@ -20,4 +20,5 @@ router.use(authMiddleware);
 // Rutas protegidas
 router.use("/usuarios", usuarioRoutes);
 router.use("/categorias", categoriaRoutes)
+router.use("/productos", productoRoutes);
 module.exports = router;

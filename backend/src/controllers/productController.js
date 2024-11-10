@@ -4,7 +4,7 @@ const productService = require("../services/ProductServices");
 // Controlador para obtener todos los productos
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await productService.getAllProducts();
+    const products = await productService.getAllProductos();
     return sendSuccess(res, products);
   } catch (error) {
     return sendError(res, 500, "Error al obtener los productos: " + error.message);
@@ -15,7 +15,7 @@ exports.getAllProducts = async (req, res) => {
 exports.getProductById = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await productService.getProductById(id);
+    const product = await productService.getProductoById(id);
 
     if (!product) {
       return sendError(res, 404, "Producto no encontrado");
