@@ -16,12 +16,12 @@ password: {
 },
 activo: { 
     type: DataTypes.BOOLEAN,
-     defaultValue: true
-     },
+    defaultValue: true
+},
 rol: { 
     type: DataTypes.ENUM('Administrador', 'Encargado Almacen'),
-     allowNull: false 
-    }
+    allowNull: false 
+}
 }, {
     tableName: 'usuario',
     timestamps: false
