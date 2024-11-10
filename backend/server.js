@@ -6,8 +6,8 @@ sequelize
   .then(() => {
     console.log("Conexión a la base de datos exitosa");
 
-    // Sincronizar modelos con la base de datos
-    return sequelize.sync(); // `alter: true` asegura que las tablas se adapten a cambios en los modelos
+    
+    return sequelize.sync(); 
   })
   .then(() => {
     app.listen(3000, () => {
