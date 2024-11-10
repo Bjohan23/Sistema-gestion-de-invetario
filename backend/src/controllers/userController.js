@@ -1,7 +1,7 @@
 const Usuario = require("../models/Usuario");
 const validExists = require("../utils/dbValidationHelper");
 const { sendSuccess, sendError } = require("../utils/responseHelper");
-const userService = require("../services/userService");
+const userService = require("../services/UserService");
 
 // Controlador para obtener todos los usuarios
 exports.getAllUsers = async (req, res) => {
@@ -40,3 +40,24 @@ exports.registerUser = async (req, res) => {
     sendError(res, 500, "Error al registrar el usuario");
   }
 };
+
+exports.updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = req.body;
+    const updatedUser = await userService.updateUser(id, user);
+    return sendSuccess(res, updatedUser, "usuario actualizado con éxito");
+  }catch(error){
+    return sendError(res,500,error.message);
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await userService.deleteUser(id);
+    return sendSuccess(res, null, "Usuario eliminado con éxito");
+  } catch (error) {
+    return sendError(res, 500, error.message);
+  }
+}
