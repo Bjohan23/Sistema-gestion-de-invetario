@@ -1,4 +1,19 @@
 <div class="contaioner"> <!-- partial:index.partial.html -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" [class.show]="showModal"
+        [style.display]="showModal ? 'block' : 'none'">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registro Exitoso</h5>
+                    <span class="close" (click)="showModal = false">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>¡Su registro se ha completado con éxito! Será redirigido en 10 segundos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
         <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
@@ -51,7 +66,8 @@
 
                     <div class="inputBox">
 
-                        <input type="password" required [(ngModel)]="Usuario.password" name="password"> <i>Contraseña</i>
+                        <input type="password" required [(ngModel)]="Usuario.password" name="password">
+                        <i>Contraseña</i>
 
                     </div>
 
@@ -63,7 +79,7 @@
 
                     <div class="links-registrar">
                         <a (click)="goToRegister()">Iniciar Sesión</a>
-                      </div>
+                    </div>
 
 
                     <div class="inputBox">

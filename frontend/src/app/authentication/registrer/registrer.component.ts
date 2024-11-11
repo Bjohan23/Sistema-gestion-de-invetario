@@ -15,7 +15,7 @@ export class RegistrerComponent {
   errorMessage: string = '';
   Usuario: Usuario = new Usuario();
   submitted = false;
-
+  showModal: boolean = false;
   constructor( private UsuarioService: UsuarioService, private router: Router) {}
   newEmployee(): void {
     this.submitted = false;
@@ -28,19 +28,17 @@ export class RegistrerComponent {
   }  
   
   save() {
-    this.UsuarioService.create(this.Usuario)
-      .subscribe({
-        next:(data)=>{
-          this.router.navigate(['/login']);
-        },
-        error:(err)=>{
-          this.errorMessage = 'Error al registrar';
-        }
+    this.UsuarioService.create(this.Usuario).subscribe({
+      next: (data) => {
+        this.showModal = true;  // Muestra el modal
+        setTimeout(() => {
+          this.router.navigate(['/login']); // Cambia la ruta después de 10 segundos
+        }, 10000);
+      },
+      error: (err) => {
+        this.errorMessage = 'Error al registrar';
       }
-        
-      );
-    this.Usuario = new Usuario();
-   
+    });
   }
 
   onSubmit() {
