@@ -5,8 +5,8 @@ const reporteService = require("../services/reporteService");
 
 exports.getAllReportes = async (req, res) => {
     try {
-        const reportes = await reporteService.getAllReporte;
-        return sendSuccess(res, reportes);
+        const reportes = await reporteService.getAllReporte();
+        return sendSuccess(res, reportes, "Reportes encontrados");
     } catch (error) {
         return sendError(res, 500, error.message);
     }
@@ -15,8 +15,8 @@ exports.getAllReportes = async (req, res) => {
 exports.getReporteById = async (req, res) => {
     try {
         const { id } = req.params;
-        const reporte = await reporteService.getReporteById(id);
-        return sendSuccess(res, reporte);
+        const reporte = await reporteService.getUserById(id);
+        return sendSuccess(res, reporte, "Reporte encontrado");
     } catch (error) {
         return sendError(res, 500, error.message);
     }

@@ -17,7 +17,7 @@ exports.getUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await userService.getUserById(id);
-    return sendSuccess(res, user);
+    return sendSuccess(res, user, "Usuario encontrado");
   } catch (error) {
     return sendError(res, 500, error.message);
   }
