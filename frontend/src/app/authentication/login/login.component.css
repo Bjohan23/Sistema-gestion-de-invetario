@@ -216,3 +216,8 @@ input[type="submit"]:active
   .error-message{
     color: #fff
   }
+
+  .links-registrar{
+    cursor: pointer;
+    color: #fff
+  }

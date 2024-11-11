@@ -16,13 +16,16 @@ export class LoginComponent {
   errorMessage: string = '';
 
   constructor(private loginService: LoginService, private router: Router) {}
-
+  goToRegister() {
+    this.router.navigate(['/register']);  // Corregí la ruta a '/register'
+  }
   onSubmit() {
     // Llamar al servicio de login para autenticar al usuario
     this.loginService.login(this.username, this.password).subscribe({
       next: (response) => {
         // Guardar el token cuando el login sea exitoso
         this.loginService.setToken(response.data.token);
+        this.loginService.setRol(response.data.rol)
         // Redirigir al dashboard después del login
         this.router.navigate(['/home']);
       },
@@ -30,7 +33,6 @@ export class LoginComponent {
         // Si ocurre un error, mostrar un mensaje
         this.errorMessage = 'Credenciales inválidas';
       }
-
     });
   }
 }
