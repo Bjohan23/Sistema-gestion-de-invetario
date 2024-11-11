@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-
+const Producto = require('./Producto'); 
 const MovimientosInventario = sequelize.define('MovimientosInventario', {
     id: {
         type: DataTypes.INTEGER,
@@ -9,7 +9,11 @@ const MovimientosInventario = sequelize.define('MovimientosInventario', {
     },
     producto_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: Producto,
+            key: 'id'
+        }
     },
     cantidad: {
         type: DataTypes.INTEGER,
@@ -35,5 +39,6 @@ const MovimientosInventario = sequelize.define('MovimientosInventario', {
     tableName: 'movimientos_inventario',
     timestamps: false
 });
-
+// definir la relacion con un alias 
+MovimientosInventario.belongsTo(Producto, { foreignKey: 'producto_id', as: 'Producto' });
 module.exports = MovimientosInventario;

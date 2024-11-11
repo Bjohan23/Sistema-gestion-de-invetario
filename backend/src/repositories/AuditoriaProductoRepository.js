@@ -1,5 +1,5 @@
 const AuditoriaProducto = require('../models/auditoriaProducto');
-const Producto = require('../models/producto');
+const Producto = require('../models/Producto');
 const Usuario = require('../models/Usuario');
 const Categoria = require('../models/Categoria');
 
