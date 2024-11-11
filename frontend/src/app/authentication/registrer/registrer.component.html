@@ -8,7 +8,7 @@
                     <span class="close" (click)="showModal = false">&times;</span>
                 </div>
                 <div class="modal-body">
-                    <p>¡Su registro se ha completado con éxito! Será redirigido en 10 segundos.</p>
+                    <p>¡Su registro se ha completado con éxito! Será redirigido en 3 segundos.</p>
                 </div>
             </div>
         </div>
@@ -72,9 +72,12 @@
                     </div>
 
                     <div class="inputBox">
-
-                        <input type="text" required [(ngModel)]="Usuario.rol" name="password"> <i>Rol</i>
-
+                        <select required [(ngModel)]="Usuario.rol" name="rol">
+                            <option value="" disabled selected>Seleccionar Rol</option>
+                            <option value="Encargado Almacen">Encargado Almacén</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                        <i>Rol</i>
                     </div>
 
                     <div class="links-registrar">
