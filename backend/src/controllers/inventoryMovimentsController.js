@@ -50,7 +50,7 @@ exports.updateInventoryMovement = async (req, res) => {
     const { id } = req.params;
     const { productId, quantity, movementType, description } = req.body;
 
-    const updatedMovement = await inventoryMovementService.updateInventoryMovement(id, {
+    const updatedMovement = await inventoryMovementService.updateMovimiento(id, {
       productId,
       quantity,
       movementType,
@@ -67,7 +67,7 @@ exports.deleteInventoryMovement = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deletedMovement = await inventoryMovementService.deleteInventoryMovement(id);
+    const deletedMovement = await inventoryMovementService.deleteMovimiento(id);
     if (!deletedMovement) {
       return sendError(res, 404, "Movimiento de inventario no encontrado");
     }

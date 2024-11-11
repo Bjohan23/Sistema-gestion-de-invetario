@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const Usuario = require('./Usuario');
-const MovimientosInventario = require('./movimientos_inventario');
+const MovimientosInventario = require('./MovimientosInventario');
 
 const AuditoriaMovimientoProducto = sequelize.define('AuditoriaMovimientoProducto', {
     id: {
@@ -13,7 +13,7 @@ const AuditoriaMovimientoProducto = sequelize.define('AuditoriaMovimientoProduct
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'movimientos_inventario',
+            model: MovimientosInventario,
             key: 'id'
         }
     },
@@ -21,7 +21,7 @@ const AuditoriaMovimientoProducto = sequelize.define('AuditoriaMovimientoProduct
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'usuario',
+            model: Usuario,
             key: 'id'
         }
     },
@@ -42,7 +42,7 @@ const AuditoriaMovimientoProducto = sequelize.define('AuditoriaMovimientoProduct
     timestamps: false
 });
 
-AuditoriaMovimientoProducto.belongsTo(MovimientosInventario, { foreignKey: 'movimiento_inventario' });
-AuditoriaMovimientoProducto.belongsTo(Usuario, { foreignKey: 'usuario_id' });
+AuditoriaMovimientoProducto.belongsTo(MovimientosInventario, { foreignKey: 'movimiento_inventario' , as: 'MovimientosInventario'});
+AuditoriaMovimientoProducto.belongsTo(Usuario, { foreignKey: 'usuario_id' , as: 'Usuario'});
 
 module.exports = AuditoriaMovimientoProducto;

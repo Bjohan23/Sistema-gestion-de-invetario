@@ -5,12 +5,15 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const categoriaRoutes = require("./categoriaRoutes");
 const productoRoutes = require("./productoRoutes");
 const reportesRoutes = require("./reporteRoutes");
+const auditoriaProductoRoutes = require("./auditoriaProductoRoutes");
+const auditorioaMovimientosProductoRoutes= require("./auditoriaMovimientoProducto");
 
 const authRoutes = require("./authRoutes");
 const router = express.Router();
 
 // rutas publicas
 router.post("/login", AuthController.login);
+router.post("/register", AuthController.registerUser);
 
 // Rutas públicas (no requieren autenticación)
 router.use("/auth", authRoutes);
@@ -22,4 +25,6 @@ router.use("/usuarios", usuarioRoutes);
 router.use("/categorias", categoriaRoutes)
 router.use("/productos", productoRoutes);
 router.use("/reportes",reportesRoutes);
+router.use("/auditoriaproducto",auditoriaProductoRoutes);
+router.use("/auditoriamovimientoproducto",auditorioaMovimientosProductoRoutes);
 module.exports = router;

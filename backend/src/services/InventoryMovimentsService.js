@@ -12,8 +12,19 @@ const createMovimiento = async (movimientoData) => {
   return await movimientosInventarioRepository.create(movimientoData);
 };
 
+const updateMovimiento = async (id, movimientoData) => {
+  return await movimientosInventarioRepository.update(id, movimientoData);
+};
+
+const deleteMovimiento = async (id) => {
+  return await movimientosInventarioRepository.delete(id);
+}
+
+
 module.exports = {
   getAllMovimientos,
   getMovimientoById,
   createMovimiento,
+  updateMovimiento,
+  deleteMovimiento
 };
