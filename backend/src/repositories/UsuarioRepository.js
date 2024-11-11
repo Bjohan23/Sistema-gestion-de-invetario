@@ -1,12 +1,17 @@
 const Usuario = require('../models/Usuario');
 
 class UsuarioRepository {
+// este metodo obtiene todos los usuarios pero excluye la contraseña 
     async findAll() {
-        return await Usuario.findAll();
+        return await Usuario.findAll({
+            attributes: { exclude: ['password'] }
+        });
     }
-
+// excluye la contraseña para que no se muestre en la respuesta
     async findById(id) {
-        return await Usuario.findByPk(id);
+        return await Usuario.findByPk(id, {
+            attributes: { exclude: ['password'] }
+        });
     }
 
     async delete(id) {

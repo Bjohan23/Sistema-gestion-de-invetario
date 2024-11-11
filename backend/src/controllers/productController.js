@@ -45,7 +45,7 @@ exports.updateProduct = async (req, res) => {
     const { id } = req.params;
     const { categoria_id, nombre, descripcion, precio, stock } = req.body;
 
-    const updatedProduct = await productService.updateProduct(id, { categoria_id, nombre, descripcion, precio, stock });
+    const updatedProduct = await productService.updateProducto(id, { categoria_id, nombre, descripcion, precio, stock });
     
     if (!updatedProduct) {
       return sendError(res, 404, "Producto no encontrado");
@@ -62,7 +62,7 @@ exports.deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deletedProduct = await productService.deleteProduct(id);
+    const deletedProduct = await productService.deleteProducto(id);
     
     if (!deletedProduct) {
       return sendError(res, 404, "Producto no encontrado");

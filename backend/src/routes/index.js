@@ -9,7 +9,6 @@ const authRoutes = require("./authRoutes");
 const router = express.Router();
 
 // rutas publicas
-router.post("/register", AuthController.register);
 router.post("/login", AuthController.login);
 
 // Rutas públicas (no requieren autenticación)

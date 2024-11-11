@@ -11,7 +11,6 @@ exports.getAllCategories = async (req, res) => {
   }
 };
 
-// Controlador para obtener una categoría por ID
 exports.getCategoryById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -30,9 +29,9 @@ exports.getCategoryById = async (req, res) => {
 // Controlador para registrar una categoría
 exports.registerCategory = async (req, res) => {
   try {
-    const { name, description } = req.body;
+    const { nombre, descripcion} = req.body;
 
-    const newCategory = await categoryService.createCategoria({ name, description });
+    const newCategory = await categoryService.createCategoria({ nombre, descripcion});
     return sendSuccess(res, newCategory, "Categoría registrada con éxito");
   } catch (error) {
     return sendError(res, 500, "Error al registrar la categoría: " + error.message);
