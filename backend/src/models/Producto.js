@@ -1,5 +1,7 @@
+// models/producto.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const Categoria = require('./Categoria'); // Importar el modelo Categoria
 
 const Producto = sequelize.define('Producto', {
     id: {
@@ -9,7 +11,11 @@ const Producto = sequelize.define('Producto', {
     },
     categoria_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: Categoria,
+            key: 'id'
+        }
     },
     nombre: {
         type: DataTypes.STRING(255),
@@ -35,5 +41,8 @@ const Producto = sequelize.define('Producto', {
     tableName: 'producto',
     timestamps: false
 });
+
+// Definir la relación con un alias
+Producto.belongsTo(Categoria, { foreignKey: 'categoria_id', as: 'Categoria' });
 
 module.exports = Producto;
