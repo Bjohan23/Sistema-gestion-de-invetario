@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
@@ -12,7 +13,7 @@ import { LoginService } from '../../services/login.service';
 export class SidebarComponent {
   role: string | null = '';
   authUser: string | null = '';
-  constructor(private loginService: LoginService) {}
+  constructor(private router: Router, private loginService: LoginService) {}
   ngOnInit() {
     this.authUser = this.loginService.getUser();
     // Recuperar el rol para usarlo en el componente
@@ -23,5 +24,8 @@ export class SidebarComponent {
     localStorage.clear();  // Limpiar todo el localStorage
     // Redirigir al login o a la página principal si lo deseas
     window.location.href = '/login';  // Redirige a la página de login
+  }
+  gotoUsuario() {
+    this.router.navigate(['gestion-usuario']);
   }
 }

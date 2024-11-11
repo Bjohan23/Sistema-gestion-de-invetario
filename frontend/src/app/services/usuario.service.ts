@@ -35,16 +35,29 @@
     }
     updateEmployee(id: number, value: any): Observable<Object> { 
       const token = this.loginService.getToken();
+      
       if (!token) {
-        // Si no hay token, redirige al login o maneja la falta de token
         this.router.navigate(['/login']);
         return new Observable(); // Retorna un observable vacío o puedes lanzar un error
       }
+    
+      // Crear los encabezados con el token
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-      return this.http.put(`${this.baseUrl}/${id}`, value); 
-    } 
+      const usuarioActualizar = {
+        id: value.id,  // ID del usuario a actualizar
+        username: value.username || '',  // Nombre de usuario
+        activo: value.activo !== undefined ? value.activo : true,  // Asegúrate de enviar un valor booleano para 'activo'
+        rol: value.rol || 'Usuario'  // Valor predeterminado de 'rol' si no se proporciona
+      };
+      // Asegúrate de que la URL esté correcta y el id se pase bien
+      const url = `${this.baseUrl2}/${id}`; // Debería ser `${this.baseUrl2}/${id}` si el id es parte de la URL
+    
+      // Realizar la solicitud PUT con los datos y los encabezados
+      return this.http.put(url, value, { headers }); 
+    }
+    
    
 
   }

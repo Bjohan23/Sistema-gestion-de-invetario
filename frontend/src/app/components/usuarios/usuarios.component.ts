@@ -19,6 +19,7 @@ export class UsuariosComponent {
   Usuario: Usuario = new Usuario();
   submitted = false;
   users: any[] = [];
+  userTempo: Usuario = new Usuario();
   role: string | null = '';
   authUser: string | null = '';
   showModal: boolean = false; 
@@ -54,7 +55,7 @@ export class UsuariosComponent {
     this.usuarioService.getEmployeesList().subscribe((response: any) => {
       if (response.success) {
         this.users = response.data;
-        console.log(this.users);
+       
       }
     });
   }
@@ -73,6 +74,8 @@ export class UsuariosComponent {
           // Redirigir después de 3 segundos
         }, 3000);
       },
+
+
       error: (err) => {
         this.errorMessage = 'Error al registrar';
       }
@@ -80,7 +83,9 @@ export class UsuariosComponent {
   }
 
   openEditModal(user: any) {
-    this.Usuario = { ...user }; // Cargar el usuario en el formulario
+    this.Usuario = { ...user }; 
+ 
+    // Cargar el usuario en el formulario
     this.showEditModal = true; // Mostrar el modal
   }
 

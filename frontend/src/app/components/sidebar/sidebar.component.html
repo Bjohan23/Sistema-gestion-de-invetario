@@ -22,7 +22,7 @@
             <img src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
             <!-- Botones con iconos SVG en formato de cuadrícula -->
             <div class="button-container">
-                <button *ngIf="role === 'Administrador'" class="button02" routerLink="gestion-usuario" routerLinkActive="active">
+                <button (click)="gotoUsuario()"  *ngIf="role === 'Administrador'" class="button02" routerLink="gestion-usuario" routerLinkActive="active">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zM10 18c-2.75 0-5-2.25-5-5s2.25-5 5-5 5 2.25 5 5-2.25 5-5 5zm0-8c-1.38 0-2.5-1.12-2.5-2.5S8.62 5 10 5s2.5 1.12 2.5 2.5S11.38 10 10 10z" fill="#ffffff"/>
                     </svg>
