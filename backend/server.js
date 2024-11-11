@@ -5,8 +5,6 @@ sequelize
   .authenticate()
   .then(() => {
     console.log("Conexión a la base de datos exitosa");
-
-    
     return sequelize.sync(); 
   })
   .then(() => {
