@@ -4,3 +4,6 @@ node_modules/
 # Ignore environment variable files
 .env
 package-lock.json
+
+# Ignoramos angular.json de frontend
+frontend/angular.json

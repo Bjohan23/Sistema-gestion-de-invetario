@@ -5,6 +5,11 @@ sequelize
   .authenticate()
   .then(() => {
     console.log("Conexión a la base de datos exitosa");
+
+    
+    return sequelize.sync(); 
+  })
+  .then(() => {
     app.listen(3000, () => {
       console.log("Servidor corriendo en el puerto 3000");
     });

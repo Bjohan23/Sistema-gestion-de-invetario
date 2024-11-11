@@ -25,7 +25,7 @@ exports.getUserById = async (req, res) => {
 
 exports.registerUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password , rol } = req.body;
 
     // Validación: Verifica si el nombre de usuario ya existe
     const userExists = await validExists(Usuario, "username", username);
@@ -34,18 +34,19 @@ exports.registerUser = async (req, res) => {
     }
 
     // Continuar con la creación del usuario
-    const newUser = await Usuario.create({ username, password });
+    const newUser = await userService.createUser({ username, password, rol });
     sendSuccess(res, newUser, "Usuario registrado con éxito");
   } catch (error) {
     sendError(res, 500, "Error al registrar el usuario");
   }
 };
 
+
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = req.body;
-    const updatedUser = await userService.updateUser(id, user);
+    const {descripcion, nombre} = req.body;
+    const updatedUser = await userService.updateUser(id, {descripcion, nombre});
     return sendSuccess(res, updatedUser, "usuario actualizado con éxito");
   }catch(error){
     return sendError(res,500,error.message);

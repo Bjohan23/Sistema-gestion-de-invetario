@@ -9,9 +9,13 @@ const getUserById = async (id) => {
   return await userRepository.findById(id);
 };
 
-const updateUser = async (id , user )=>{
-  return await userRepository.update(id,user);
+const updateUser = async (id , userData )=>{
+  return await userRepository.update(id,userData);
 }
+
+const createUser = async (userData) => {
+  return await userRepository.create(userData);
+};
 
 const deleteUser = async (id)=>{
   return await userRepository.delete(id);
@@ -22,5 +26,6 @@ module.exports = {
   getAllUsers,
   getUserById,
   updateUser,
-  deleteUser
+  deleteUser,
+  createUser
 };
