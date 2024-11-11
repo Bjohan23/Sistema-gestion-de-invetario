@@ -7,6 +7,7 @@ const productoRoutes = require("./productoRoutes");
 const reportesRoutes = require("./reporteRoutes");
 const auditoriaProductoRoutes = require("./auditoriaProductoRoutes");
 const auditorioaMovimientosProductoRoutes= require("./auditoriaMovimientoProducto");
+const movimientosInventarioRoutes= require("./movimientosInventarioRoutes");
 
 const authRoutes = require("./authRoutes");
 const router = express.Router();
@@ -27,4 +28,5 @@ router.use("/productos", productoRoutes);
 router.use("/reportes",reportesRoutes);
 router.use("/auditoriaproducto",auditoriaProductoRoutes);
 router.use("/auditoriamovimientoproducto",auditorioaMovimientosProductoRoutes);
+router.use("/movimientoinventario",movimientosInventarioRoutes);
 module.exports = router;
