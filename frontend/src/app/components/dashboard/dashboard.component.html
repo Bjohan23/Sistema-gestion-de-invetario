@@ -1,1 +1,11 @@
-<p>dashboard works!</p>
+<div class="sidebar">
+    <h2>GESTIÓN DE INVENTARIO</h2>
+    <ul>
+      <li *ngIf="role === 'Administrador'"><a routerLink="/gestion-usuario" routerLinkActive="active">Gestión Usuario</a></li>
+      <li><a routerLink="/gestion-productos" routerLinkActive="active">Gestión Productos</a></li>
+      <li><a routerLink="/gestion-categoria" routerLinkActive="active">Gestión Categoría</a></li>
+      <li><a routerLink="/gestion-movimientos" routerLinkActive="active">Gestión de Movimientos</a></li>
+      <li><a routerLink="/gestion-auditoria" routerLinkActive="active">Gestión Auditoría</a></li>
+    </ul>
+  </div>
+  

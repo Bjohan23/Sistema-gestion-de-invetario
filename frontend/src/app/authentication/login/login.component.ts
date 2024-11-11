@@ -30,6 +30,7 @@ export class LoginComponent {
         // Guardar el token cuando el login sea exitoso
         this.loginService.setToken(response.data.token);
         this.loginService.setRol(response.data.rol)
+        this.loginService.setUser(response.data.username)
         // Redirigir al dashboard después del login
         this.router.navigate(['/home']);
       },
