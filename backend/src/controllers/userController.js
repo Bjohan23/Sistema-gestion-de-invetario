@@ -17,6 +17,9 @@ exports.getUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await userService.getUserById(id);
+    if (!user) {
+      return sendError(res, 404, "Usuario no encontrado");
+    }
     return sendSuccess(res, user, "Usuario encontrado");
   } catch (error) {
     return sendError(res, 500, error.message);
@@ -45,8 +48,13 @@ exports.registerUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const {descripcion, nombre} = req.body;
-    const updatedUser = await userService.updateUser(id, {descripcion, nombre});
+    const {rol, username} = req.body;
+    // Validación: Verifica si el nombre de usuario ya existe
+    const userExists = await validExists(Usuario, "username", username);
+    if (userExists) {
+      return sendError(res, 400, "El nombre de usuario ya está registrado no se puede actualizar");
+    }
+    const updatedUser = await userService.updateUser(id, {rol, username});
     return sendSuccess(res, updatedUser, "usuario actualizado con éxito");
   }catch(error){
     return sendError(res,500,error.message);

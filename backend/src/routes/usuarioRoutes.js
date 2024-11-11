@@ -6,7 +6,7 @@ const routes = [
   { method: "get", path: "/:id", handler: usersController.getUserById },
   { method: "post", path: "/", handler: usersController.registerUser },
   { method: "put", path: "/:id", handler: usersController.updateUser },
-  // { method: 'delete', path: '/:id/:useridsession', handler: usersController.deleteUser },
+  { method: 'delete', path: '/:id', handler: usersController.deleteUser },
 ];
 
 module.exports = createRouter(routes);
