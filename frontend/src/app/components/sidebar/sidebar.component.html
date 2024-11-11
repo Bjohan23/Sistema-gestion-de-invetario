@@ -1,0 +1,64 @@
+<div class="dashboard">
+    <!-- Barra lateral de navegación -->
+    <app-dashboard></app-dashboard>
+
+    <!-- Contenedor principal -->
+    <div class="main-content">
+        <header>
+            <div class="profile">
+                <div class="profile-box">
+                    <div class="profile-icon">👤</div>
+                    <!-- Mostrar el valor del usuario desde localStorage -->
+                    <div class="profile-name">{{ authUser }}</div>
+                    <button class="logout-btn" (click)="logout()">Cerrar</button>
+                </div>
+            </div>
+        </header>
+        
+
+        <!-- Aquí va el contenido de la página seleccionada -->
+        <div class="content">
+            <h1>Bienvenido a la Gestión de Inventario</h1>
+            <img src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+            <!-- Botones con iconos SVG en formato de cuadrícula -->
+            <div class="button-container">
+                <button (click)="gotoUsuario()"  *ngIf="role === 'Administrador'" class="button02" routerLink="gestion-usuario" routerLinkActive="active">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zM10 18c-2.75 0-5-2.25-5-5s2.25-5 5-5 5 2.25 5 5-2.25 5-5 5zm0-8c-1.38 0-2.5-1.12-2.5-2.5S8.62 5 10 5s2.5 1.12 2.5 2.5S11.38 10 10 10z" fill="#ffffff"/>
+                    </svg>
+                    Gestión Usuario
+                </button>
+        
+                <button class="button02" routerLink="/gestion-productos" routerLinkActive="active">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6H2V4h16v2zM2 10h16v2H2v-2zM2 14h16v2H2v-2z" fill="#ffffff"/>
+                    </svg>
+                    Gestión Productos
+                </button>
+        
+                <button  class="button02" routerLink="/gestion-categoria" routerLinkActive="active">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 4h16v12H2V4z" fill="#ffffff"/>
+                    </svg>
+                    Gestión Categoría
+                </button>
+        
+                <button  class="button02" routerLink="/gestion-movimientos" routerLinkActive="active">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 15l7-7-7-7" fill="none" stroke="#ffffff" stroke-width="2"/>
+                    </svg>
+                    Gestión de Movimientos
+                </button>
+        
+                <button class="button02" routerLink="/gestion-auditoria" routerLinkActive="active">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6H2V4h16v2zM2 10h16v2H2v-2zM2 14h16v2H2v-2z" fill="#ffffff"/>
+                    </svg>
+                    Gestión Auditoría
+                </button>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>

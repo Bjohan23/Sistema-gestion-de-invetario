@@ -9,6 +9,7 @@ export class LoginService {
   private baseUrl = 'http://localhost:3000/v1/api/login';
   private tokenkey = 'authToken';
   private rolkey = 'authRol';
+  private userkey = 'authUser';
   constructor(private http: HttpClient, private router: Router) { }
 
     login(username: string, password: string): Observable<any>{
@@ -16,7 +17,7 @@ export class LoginService {
       return this.http.post(`${this.baseUrl}`, loginData);
     }
 
-    
+
     setToken(token: string) {
       if (typeof window !== 'undefined') {
         localStorage.setItem(this.tokenkey, token);
@@ -42,6 +43,20 @@ export class LoginService {
     getRol(): string | null {
       if (typeof window !== 'undefined') {
         return localStorage.getItem(this.rolkey);
+      }
+      return null;
+    }
+
+    setUser(user: string){
+      if (typeof window !== 'undefined') {
+        return localStorage.setItem(this.userkey, user);
+      }
+      return null;
+    }
+
+    getUser(): string | null{
+      if (typeof window !== 'undefined') {
+        return localStorage.getItem(this.userkey);
       }
       return null;
     }
