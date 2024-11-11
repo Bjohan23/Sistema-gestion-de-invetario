@@ -17,7 +17,7 @@ export class SidebarComponent {
     this.authUser = this.loginService.getUser();
     // Recuperar el rol para usarlo en el componente
     this.role = this.loginService.getRol();
-    console.log('Rol recuperado:', this.role);
+ 
   }
   logout() {
     localStorage.clear();  // Limpiar todo el localStorage
