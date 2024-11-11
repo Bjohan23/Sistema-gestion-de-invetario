@@ -28,12 +28,17 @@ export class RegistrerComponent {
   }  
   
   save() {
+    if (!this.Usuario.username || !this.Usuario.password || !this.Usuario.rol) {
+      this.errorMessage = 'Todos los campos son obligatorios';
+      return;
+    }
+
     this.UsuarioService.create(this.Usuario).subscribe({
       next: (data) => {
         this.showModal = true;  // Muestra el modal
         setTimeout(() => {
           this.router.navigate(['/login']); // Cambia la ruta después de 10 segundos
-        }, 10000);
+        }, 3000);
       },
       error: (err) => {
         this.errorMessage = 'Error al registrar';

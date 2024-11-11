@@ -6,10 +6,10 @@
     providedIn: 'root'
   })
   export class UsuarioService {
-    private baseUrl = 'http://localhost:3000/v1/api/registrer';
+    private baseUrl = 'http://localhost:3000/v1/api/register';
     
     constructor(private http: HttpClient, private router: Router) { }
-    
+
     create(usuario: Object): Observable<Object> { 
       return this.http.post(`${this.baseUrl}`, usuario); 
     } 

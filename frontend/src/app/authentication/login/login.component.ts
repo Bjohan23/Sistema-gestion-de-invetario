@@ -20,6 +20,10 @@ export class LoginComponent {
     this.router.navigate(['/register']);  // Corregí la ruta a '/register'
   }
   onSubmit() {
+    if (!this.username || !this.password ) {
+      this.errorMessage = 'Todos los campos son obligatorios';
+      return;
+    }
     // Llamar al servicio de login para autenticar al usuario
     this.loginService.login(this.username, this.password).subscribe({
       next: (response) => {
