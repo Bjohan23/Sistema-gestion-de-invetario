@@ -14,6 +14,7 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent {
+  showModal2: boolean = false;
   showEditModal = false;
   errorMessage: string = '';
   Usuario: Usuario = new Usuario();
@@ -68,9 +69,11 @@ export class UsuariosComponent {
 
     this.usuarioService.create(this.Usuario).subscribe({
       next: (data) => {
-        this.showModal = true;  // Mostrar modal de éxito
+        this.showModal2 = true;  // Mostrar modal de éxito
         setTimeout(() => {
           this.closeModal();
+          
+          this.getUsers();
           // Redirigir después de 3 segundos
         }, 3000);
       },

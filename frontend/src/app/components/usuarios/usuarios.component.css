@@ -1,4 +1,64 @@
 /* Estilos del modal */
+.modal-success {
+  display: block; /* Muestra el modal cuando sea necesario */
+  position: fixed;
+  z-index: 9999; /* Asegura que el modal esté encima de todo */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
+}
+
+.modal-content-success {
+  background-color: #00ff91;
+  margin: 10% auto; /* Ajusta el margen para centrar */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  z-index: 10000; /* Asegura que el contenido esté encima del fondo del modal */
+}
+
+.close-success {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-success:hover,
+.close-success:focus {
+  color: black;
+  text-decoration: none;
+}
+
+.modal-header-success {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body-success {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.inputBox select {
+  position: relative;
+  width: 100%;
+  background: #333;
+  border: none;
+  outline: none;
+  padding: 25px 10px 7.5px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+
 .modal {
     display: block; /* Por defecto visible */
     position: fixed;

@@ -1,116 +1,132 @@
 <div class="dashboard">
-    <!-- Barra lateral de navegación -->
-    <app-dashboard></app-dashboard>
+  <div class="modal-success fade" id="successModal" tabindex="-1" role="dialog" [class.show]="showModal"
+    [style.display]="showModal2 ? 'block' : 'none'">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content-success">
+        <div class="modal-header-success">
+          <h5 class="modal-title">¡Éxito!</h5> <!-- Título cambiado -->
+          <span class="close-success" (click)="showModal2 = false">&times;</span>
+        </div>
+        <div class="modal-body-success">
+          <p>¡Su registro se ha completado con éxito! Será redirigido en 3 segundos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Contenedor principal -->
-    <div class="main-content">
-        <header>
-            <div class="profile">
-                <div class="profile-box">
-                    <div class="profile-icon">👤</div>
-                    <!-- Mostrar el valor del usuario desde localStorage -->
-                    <div class="profile-name">{{ authUser }}</div>
-                    <button class="logout-btn" (click)="logout()">Cerrar</button>
-                </div>
+  <!-- Barra lateral de navegación -->
+  <app-dashboard></app-dashboard>
+
+  <!-- Contenedor principal -->
+  <div class="main-content">
+    <header>
+      <div class="profile">
+        <div class="profile-box">
+          <div class="profile-icon">👤</div>
+          <!-- Mostrar el valor del usuario desde localStorage -->
+          <div class="profile-name">{{ authUser }}</div>
+          <button class="logout-btn" (click)="logout()">Cerrar</button>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- Aquí va el contenido de la página seleccionada -->
+    <div class="content">
+      <h3>Gestión de Usuarios</h3>
+
+      <!-- Tabla de usuarios -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre de Usuario</th>
+            <th>Estado</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.activo ? 'Activo' : 'Inactivo' }}</td>
+            <td>{{ user.rol }}</td>
+            <td>
+              <button class="btn btn-warning" (click)="openEditModal(user)">Editar</button>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Botón para registrar un nuevo usuario -->
+      <button class="btn btn-primary" (click)="openModal()">Registrar Usuario</button>
+      <div *ngIf="showEditModal" class="modal" tabindex="-1" role="dialog" style="display: block;">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Editar Usuario</h5>
+              <button type="button" class="close" (click)="closeEditModal()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-        </header>
-        
-
-        <!-- Aquí va el contenido de la página seleccionada -->
-        <div class="content">
-            <h3>Gestión de Usuarios</h3>
-      
-            <!-- Tabla de usuarios -->
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre de Usuario</th>
-                  <th>Estado</th>
-                  <th>Rol</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let user of users">
-                  <td>{{ user.id }}</td>
-                  <td>{{ user.username }}</td>
-                  <td>{{ user.activo ? 'Activo' : 'Inactivo' }}</td>
-                  <td>{{ user.rol }}</td>
-                  <td>
-                    <button class="btn btn-warning" (click)="openEditModal(user)">Editar</button>
-                   
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-      
-            <!-- Botón para registrar un nuevo usuario -->
-            <button class="btn btn-primary" (click)="openModal()">Registrar Usuario</button>
-            <div *ngIf="showEditModal" class="modal" tabindex="-1" role="dialog" style="display: block;">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Editar Usuario</h5>
-                      <button type="button" class="close" (click)="closeEditModal()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="inputBox">
-                        <input [(ngModel)]="Usuario.username" name="username" required />
-                        <i>Username</i>
-                      </div>
-                      <div class="inputBox">
-                        <select [(ngModel)]="Usuario.rol" name="rol" required>
-                          <option value="" disabled selected>Seleccionar Rol</option>
-                          <option value="Encargado Almacen">Encargado Almacén</option>
-                          <option value="Administrador">Administrador</option>
-                        </select>
-                        <i>Rol</i>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" (click)="updateUser()">Guardar</button>
-                      <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancelar</button>
-                    </div>
-                  </div>
-                </div>
+            <div class="modal-body">
+              <div class="inputBox">
+                <input [(ngModel)]="Usuario.username" name="username" required />
+                <i>Username</i>
               </div>
-            <!-- Modal para registrar usuario -->
-            <div *ngIf="showModal" class="modal">
-              <div class="modal-content">
-                <span class="close" (click)="closeModal()">&times;</span>
-                <h4>Registrar Nuevo Usuario</h4>
-                <form (ngSubmit)="onSubmit()">
-                  <div class="inputBox">
-                    <input type="text" [(ngModel)]="Usuario.username" name="username" required placeholder="Nombre de usuario">
-                    <i>Nombre de Usuario</i>
-                  </div>
-      
-                  <div class="inputBox">
-                    <input type="password" [(ngModel)]="Usuario.password" name="password" required placeholder="Contraseña">
-                    <i>Contraseña</i>
-                  </div>
-      
-                  <div class="inputBox">
-                    <select required [(ngModel)]="Usuario.rol" name="rol">
-                      <option value="" disabled selected>Seleccionar Rol</option>
-                      <option value="Encargado Almacén">Encargado Almacén</option>
-                      <option value="Administrador">Administrador</option>
-                    </select>
-                    <i>Rol</i>
-                  </div>
-      
-                  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-      
-                  <button type="submit" class="btn btn-success">Registrar</button>
-                </form>
+              <div class="inputBox">
+                <select [(ngModel)]="Usuario.rol" name="rol" required>
+                  <option value="" disabled selected>Seleccionar Rol</option>
+                  <option value="Encargado Almacen">Encargado Almacén</option>
+                  <option value="Administrador">Administrador</option>
+                </select>
+                <i>Rol</i>
               </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)="updateUser()">Guardar</button>
+              <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancelar</button>
             </div>
           </div>
         </div>
-        
-        
+      </div>
+      <!-- Modal para registrar usuario -->
+      <div *ngIf="showModal" class="modal">
+        <div class="modal-content">
+          <span class="close" (click)="closeModal()">&times;</span>
+          <h4>Registrar Nuevo Usuario</h4>
+          <form (ngSubmit)="onSubmit()">
+            <div class="inputBox">
+              <input type="text" [(ngModel)]="Usuario.username" name="username" required
+                placeholder="Nombre de usuario">
+              <i>Nombre de Usuario</i>
+            </div>
+
+            <div class="inputBox">
+              <input type="password" [(ngModel)]="Usuario.password" name="password" required placeholder="Contraseña">
+              <i>Contraseña</i>
+            </div>
+
+            <div class="inputBox">
+              <select required [(ngModel)]="Usuario.rol" name="rol">
+                <option value="" disabled selected>Seleccionar Rol</option>
+                <option value="Encargado Almacén">Encargado Almacén</option>
+                <option value="Administrador">Administrador</option>
+              </select>
+              <i>Rol</i>
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+            <button type="submit" class="btn btn-success">Registrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 </div>
