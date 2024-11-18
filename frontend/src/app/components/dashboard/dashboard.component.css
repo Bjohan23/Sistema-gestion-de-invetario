@@ -1,46 +1,98 @@
-
-.sidebar {
-    width: 250px;
-    height: 100%;
-    background-color: #ee4300;
-    color: white;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.sidebar h2 {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-weight: 800;
-}
-
-.sidebar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.sidebar ul li {
-    margin-bottom: 10px;
-}
-
-.sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    display: block;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.sidebar ul li a:hover {
-    background-color: #34495e;
-}
-
-.active{
-    background-color: #34495e;
-}
+    /* Estilo para la barra lateral */
+    .sidebar {
+        width: 250px;
+        height: 100%; 
+        background-color: #6700ee;
+        color: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s ease;
+        z-index: 1000; /* Asegura que la sidebar esté por encima de otros elementos, pero debajo del botón */
+        /* La barra lateral debe estar fija en la pantalla */
+        top: 0;
+        left: 0;
+    }
+    
+    .sidebar h2 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 24px;
+        margin-top: 10px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+    
+    .sidebar ul {
+        list-style-type: none;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+    
+    .sidebar ul li {
+        margin-bottom: 10px;
+    }
+    
+    .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        display: block;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    
+    .sidebar ul li a:hover {
+        background-color: #34495e;
+    }
+    
+    .active {
+        background-color: #34495e;
+    }
+    
+    /* Botón para mostrar/ocultar la barra lateral */
+    .sidebar-toggle {
+        display: none; /* Por defecto, no mostrar el botón en pantallas grandes */
+        position: fixed;
+        top: 10px;
+        left: 20px;
+        background-color: #6700ee;
+        color: white;
+        border: none;
+        font-size: 30px;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 2000; /* Asegura que el botón esté por encima de la sidebar */
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .sidebar-toggle:focus {
+        outline: none;
+    }
+    
+    .sidebar-toggle:hover {
+        background-color: #6700ee; /* Cambia el color del botón al pasar el mouse */
+    }
+    
+    /* Estilos para pantallas pequeñas */
+    @media (max-width: 580px) {
+        .sidebar h2{
+            margin-top: 60px;
+        }
+        .sidebar {
+            position: fixed; 
+        transform: translateX(-100%); /* Ocultar la barra lateral por defecto */
+        }
+    
+        .sidebar.show {
+        transform: translateX(0); /* Mostrar la barra lateral */
+        }
+    
+        .sidebar-toggle {
+        display: block; /* Mostrar el botón en pantallas pequeñas */
+        }
+    }
+    

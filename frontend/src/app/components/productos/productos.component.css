@@ -1,0 +1,83 @@
+
+.alert {
+    position: fixed;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta la posición para que quede perfectamente centrada */
+    z-index: 1050;
+    width: auto;
+    max-width: 400px;
+    text-align: center; /* Centrar el texto y botones */
+  }
+  
+  .alert .btn {
+    margin: 5px;
+  }
+  
+  
+  .modal-registrar{
+    position: fixed;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta la posición para que quede perfectamente centrada */
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: #000000c9;
+  }
+  
+  .Formu-Registrar{
+    min-width: 350px;
+    height: 500px;
+    text-align: start;
+  }
+
+  .dashboard {
+    width: 100%;
+  
+    display: flex;
+    min-height: 100vh;
+  }
+  h3{
+    background-color: #6700ee;
+    font-size: 30px;
+    padding: 10px 10px;
+    color: aliceblue;
+    font-weight: 900;
+  }
+  .imgDestacada {
+    width: 100%;
+    height: 400px;
+    background-color: #000000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    /* Centra verticalmente */
+    justify-content: center;
+    /* Centra horizontalmente */
+  }
+  
+  .imgDestacada img {
+    width: 100%;
+    /* Permite ajustar el ancho automáticamente */
+    height: auto;
+    /* La altura ocupará todo el contenedor */
+    object-fit: cover;
+    /* Asegura que la imagen se recorte para llenar el contenedor */
+    object-position: center;
+    /* Centra la imagen */
+  }
+  
+
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  @media (max-width: 905px) {
+    .imgDestacada img {
+      width: auto;
+      height: 100%;
+    }
+  
+  }

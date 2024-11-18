@@ -1,167 +1,83 @@
-/* Estilos del modal */
-.modal-success {
-  display: block; /* Muestra el modal cuando sea necesario */
-  position: fixed;
-  z-index: 9999; /* Asegura que el modal esté encima de todo */
-  left: 0;
-  top: 0;
+.dashboard {
   width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
-}
 
-.modal-content-success {
-  background-color: #00ff91;
-  margin: 10% auto; /* Ajusta el margen para centrar */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  z-index: 10000; /* Asegura que el contenido esté encima del fondo del modal */
-}
-
-.close-success {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close-success:hover,
-.close-success:focus {
-  color: black;
-  text-decoration: none;
-}
-
-.modal-header-success {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  min-height: 100vh;
 }
-
-.modal-body-success {
-  padding: 10px;
-  font-size: 16px;
+h3{
+  background-color: #6700ee;
+  font-size: 30px;
+  padding: 10px 10px;
+  color: aliceblue;
+  font-weight: 900;
 }
-
-.inputBox select {
-  position: relative;
+.imgDestacada {
   width: 100%;
-  background: #333;
-  border: none;
-  outline: none;
-  padding: 25px 10px 7.5px;
-  border-radius: 4px;
-  color: #fff;
-  font-weight: 500;
-  font-size: 1em;
+  height: 400px;
+  background-color: #000000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  /* Centra verticalmente */
+  justify-content: center;
+  /* Centra horizontalmente */
+}
+
+.imgDestacada img {
+  width: 100%;
+  /* Permite ajustar el ancho automáticamente */
+  height: auto;
+  /* La altura ocupará todo el contenedor */
+  object-fit: cover;
+  /* Asegura que la imagen se recorte para llenar el contenedor */
+  object-position: center;
+  /* Centra la imagen */
 }
 
 
-.modal {
-    display: block; /* Por defecto visible */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-    overflow: auto;
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 5px;
-    width: 50%;
-  }
-  
-  .close {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    float: right;
-    cursor: pointer;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  /* Estilos adicionales para el formulario */
-  .inputBox {
-    margin-bottom: 10px;
-  }
-  
-  input, select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    margin-top: 10px;
-  }
-  
-  .dashboard {
-    display: flex;
-    min-height: 100vh;
-}
 
 
 .main-content {
-    flex-grow: 1;
-    padding: 20px;
+  flex-grow: 1;
+  padding: 20px;
 }
 
-header {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
+@media (max-width: 905px) {
+  .imgDestacada img {
+    width: auto;
+    height: 100%;
+  }
+
+}
+.alert {
+  position: fixed;
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta la posición para que quede perfectamente centrada */
+  z-index: 1050;
+  width: auto;
+  max-width: 400px;
+  text-align: center; /* Centrar el texto y botones */
 }
 
-.profile {
-    display: flex;
-    align-items: center;
+.alert .btn {
+  margin: 5px;
 }
 
-.profile-box {
-    display: flex;
-    align-items: center;
-    background-color: #ecf0f1;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+.modal-registrar{
+  position: fixed;
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta la posición para que quede perfectamente centrada */
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background: #000000c9;
 }
 
-.profile-icon {
-    font-size: 25px;
-    margin-right: 10px;
-}
-
-.profile-name {
-    font-size: 18px;
-    margin-right: 15px;
-}
-
-.logout-btn {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.logout-btn:hover {
-    background-color: #c0392b;
+.Formu-Registrar{
+  min-width: 350px;
+  height: 400px;
+  text-align: start;
 }

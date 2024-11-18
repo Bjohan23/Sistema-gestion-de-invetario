@@ -31,12 +31,14 @@ export class LoginComponent {
         this.loginService.setToken(response.data.token);
         this.loginService.setRol(response.data.rol)
         this.loginService.setUser(response.data.user)
+    
         // Redirigir al dashboard después del login
         this.router.navigate(['/sidebar']);
       },
       error: (error) => {
+        this.password = '';
         // Si ocurre un error, mostrar un mensaje
-        this.errorMessage = 'Credenciales inválidas';
+        this.errorMessage = 'Usuario y/o Credenciales inválidas';
       }
     });
   }

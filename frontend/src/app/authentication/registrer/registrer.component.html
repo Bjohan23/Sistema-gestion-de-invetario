@@ -53,8 +53,8 @@
 
             <div class="content">
 
-                <h2>Registrar</h2>
-                <p class="subtitle">Gestion Inventario</p>
+                <p class="subtitle">GESTIÓN INVENTARIO</p>
+                <h2>Registrar Usuario</h2>
 
                 <form (ngSubmit)="onSubmit()" class="form">
 
@@ -66,8 +66,15 @@
 
                     <div class="inputBox">
 
-                        <input type="password" required [(ngModel)]="Usuario.password" name="password">
+                        <input  [type]="showPassword ? 'text' : 'password'"  required [(ngModel)]="Usuario.password" name="password">
                         <i>Contraseña</i>
+
+                        <div class="input-group-append">
+                            <span class="input-group-text" (click)="togglePassword()" style="cursor: pointer;">
+                                <i [ngClass]="showPassword ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill' + ' icon-size'"></i>
+                            </span>
+                        </div>
+
 
                     </div>
 
@@ -77,19 +84,20 @@
                             <option value="Encargado Almacen">Encargado Almacén</option>
                             <option value="Administrador">Administrador</option>
                         </select>
-                        <i>Rol</i>
+                        <i>Rol </i>
+
                     </div>
 
                     <div class="links-registrar">
-                        <a (click)="goToRegister()">Iniciar Sesión</a>
-                    </div>
-
-
-                    <div class="inputBox">
 
                         <input type="submit" value="Registrar">
 
                     </div>
+                    <div class="login">
+                        <a class="btn-submit" (click)="goToRegister()">Iniciar Sesión</a>
+                    </div>
+
+
                     <div *ngIf="errorMessage" class="error-message">
                         {{ errorMessage }}
                     </div>
