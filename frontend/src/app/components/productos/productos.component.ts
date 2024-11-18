@@ -11,6 +11,7 @@ import { CategoriasService } from '../../services/categorias.service';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
+
 import { AuditoriaProducto } from '../../models/AuditoriaProducto';
 import { AuditorioProductosService } from '../../services/auditorio-productos.service';
 @Component({
