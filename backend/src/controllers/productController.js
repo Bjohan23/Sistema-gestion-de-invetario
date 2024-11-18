@@ -43,9 +43,9 @@ exports.registerProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const { categoria_id, nombre, descripcion, precio, stock } = req.body;
-
-    const updatedProduct = await productService.updateProducto(id, { categoria_id, nombre, descripcion, precio, stock });
+    const { categoria_id, nombre, descripcion, precio, stock, activo } = req.body;
+    console.log('HOLA NO ACTUALIZA EL ESTADO',req.body);
+    const updatedProduct = await productService.updateProducto(id, { categoria_id, nombre, descripcion, precio, stock, activo });
     
     if (!updatedProduct) {
       return sendError(res, 404, "Producto no encontrado");

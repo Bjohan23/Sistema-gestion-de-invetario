@@ -9,49 +9,13 @@
     padding: 20px;
 }
 
-header {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-}
-
-.profile {
-    display: flex;
-    align-items: center;
-}
-
-.profile-box {
-    display: flex;
-    align-items: center;
-    background-color: #ecf0f1;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.profile-icon {
-    font-size: 25px;
-    margin-right: 10px;
-}
-
-.profile-name {
-    font-size: 18px;
-    margin-right: 15px;
-}
-
-.logout-btn {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.logout-btn:hover {
-    background-color: #c0392b;
-}
+h3{
+    background-color: #6700ee;
+    font-size: 30px;
+    padding: 10px 10px;
+    color: aliceblue;
+    font-weight: 900;
+  }
 
 .content h1 {
     font-size: 30px;
@@ -75,7 +39,7 @@ img{
     padding: 10px 15px;
     font-size: 16px;
     height: 100px;
-    background-color: #ee4300;
+    background-color: #5a00d4;
     color: white;
     border: none;
     border-radius: 5px;
@@ -91,3 +55,27 @@ button:hover {
 button svg {
     margin-right: 10px;
 }
+
+.imgDestacada {
+    width: 100%;
+    height: 300px;
+    background-color: #00ff91;
+    overflow: hidden;
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+  }
+  
+  .imgDestacada img {
+    width: 100%; /* Permite ajustar el ancho automáticamente */
+    height: auto; /* La altura ocupará todo el contenedor */
+    object-fit: cover; /* Asegura que la imagen se recorte para llenar el contenedor */
+    object-position: center; /* Centra la imagen */
+  } 
+  @media (max-width: 905px){
+    .imgDestacada img{
+      width: auto;
+      height: 100%;
+    }
+    
+  }

@@ -1,11 +1,13 @@
-<div class="sidebar">
-    <h2>GESTIÓN DE INVENTARIO</h2>
+<div class="sidebar" [class.show]="isSidebarVisible">
+    <h2><a (click)="gotoAdonde('/sidebar')">GESTIÓN DE INVENTARIO</a></h2>
     <ul>
-      <li *ngIf="role === 'Administrador'"[class.active]="isActive('/gestion-usuario')"><a (click)="gotoUsuario()" >Gestión Usuario</a></li>
-      <li><a routerLink="gestion-productos" routerLinkActive="active">Gestión Productos</a></li>
-      <li><a routerLink="/gestion-categoria" routerLinkActive="active">Gestión Categoría</a></li>
-      <li><a routerLink="/gestion-movimientos" routerLinkActive="active">Gestión de Movimientos</a></li>
-      <li><a routerLink="/gestion-auditoria" routerLinkActive="active">Gestión Auditoría</a></li>
+      <li *ngIf="role === 'Administrador'"[class.active]="isActive('/gestion-usuario')"><a (click)="gotoAdonde('/gestion-usuario')" >Gestión Usuario</a></li>
+      <li [class.active]="isActive('/categorias')"><a (click)="gotoAdonde('/categorias')">Gestión Categorias</a></li>
+      <li [class.active]="isActive('/productos')"><a (click)="gotoAdonde('/productos')">Gestión Productos</a></li>
+      <li [class.active]="isActive('/movimiento')"><a (click)="gotoAdonde('/movimiento')">Gestión Movimientos</a></li>
+      <li *ngIf="role === 'Administrador'" [class.active]="isActive('/auditoria')"><a (click)="gotoAdonde('/auditoria')">Gestión Auditoria</a></li>
+
     </ul>
   </div>
-  
+  <button class="sidebar-toggle" (click)="toggleSidebar()">☰</button>
+  <!-- Botón para mostrar/ocultar la sidebar -->

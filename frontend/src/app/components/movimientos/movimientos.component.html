@@ -1,0 +1,117 @@
+<div class="dashboard">
+    <!-- Mensajes de éxito -->
+    <div *ngIf="showSuccessMessage" class="alert alert-success">
+        <strong>{{ successMessage }}</strong>
+    </div>
+
+    <!-- Alerta de Confirmación de Eliminación -->
+    <div *ngIf="showDeleteAlert" class="alert alert-danger">
+        <strong>¡Atención!</strong> ¿Estás seguro de que deseas eliminar el movimiento?
+        <div class="mt-2">
+            <button class="btn btn-danger btn-sm" (click)="confirmDelete()">Eliminar</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelDelete()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div *ngIf="showRegistrarNuevo" class="modal-registrar">
+        <form class="Formu-Registrar alert alert-primary" (ngSubmit)="save()">
+            <h4 class="text-center mb-4">Registrar Nuevo Movimiento</h4>
+
+            <!-- Producto -->
+            <div class="form-group">
+                <label for="inputProductoId">Producto</label>
+                <select class="form-control" id="inputProductoId" [(ngModel)]="movimiento.producto_id"
+                    name="producto_id" required>
+                    <option *ngFor="let producto of productos" [value]="producto.id">
+                        {{ producto.nombre }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Cantidad -->
+            <div class="form-group">
+                <label for="inputCantidad">Cantidad</label>
+                <input type="number" class="form-control" id="inputCantidad" [(ngModel)]="movimiento.cantidad"
+                    name="cantidad" placeholder="Cantidad" required />
+            </div>
+
+            <!-- Tipo -->
+            <div class="form-group">
+                <label for="inputTipo">Tipo</label>
+                <select class="form-control" id="inputTipo" [(ngModel)]="movimiento.tipo" name="tipo" required>
+                    <option value="Ingreso">Ingreso</option>
+                    <option value="Egreso">Egreso</option>
+                </select>
+            </div>
+
+            <!-- Estado -->
+            <div class="form-group">
+                <label for="inputEstado">Estado</label>
+                <select class="form-control" id="inputEstado" [(ngModel)]="movimiento.estado" name="estado" required>
+                    <option value="Realizado">Realizado</option>
+                    <option value="No Compleado">No Compleado</option>
+                </select>
+            </div>
+
+            <!-- Fecha -->
+            <div class="form-group">
+                <label for="inputFecha">Fecha</label>
+                <input type="date" class="form-control" id="inputFecha" [(ngModel)]="movimiento.fecha" name="fecha"
+                    required />
+            </div>
+
+            <!-- Motivo -->
+            <div class="form-group">
+                <label for="inputMotivo">Motivo</label>
+                <input type="text" class="form-control" id="inputMotivo" [(ngModel)]="movimiento.motivo" name="motivo"
+                    placeholder="Motivo" required />
+            </div>
+
+            <!-- Botones -->
+            <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-primary">Registrar Movimiento</button>
+                <button type="button" class="btn btn-secondary" (click)="closeRegistrarNuevo()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <app-dashboard></app-dashboard>
+    <!-- Tabla de movimientos -->
+    <div class="main-content">
+        <app-profile></app-profile>
+        <div class="imgDestacada">
+            <img src="https://plus.unsplash.com/premium_photo-1661674192497-e124e919e69c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW52ZW50b3J5fGVufDB8fDB8fHww"
+                alt="">
+        </div>
+        <h3>Gestión de Movimientos de Inventario</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="bg bg-danger text-light">ID</th>
+                    <th class="bg bg-danger text-light">Producto ID</th>
+                    <th class="bg bg-danger text-light">Cantidad</th>
+                    <th class="bg bg-danger text-light">Tipo</th>
+                    <th class="bg bg-danger text-light">Estado</th>
+                    <th class="bg bg-danger text-light">Fecha</th>
+                    <th class="bg bg-danger text-light">Motivo</th>
+                    <th class="bg bg-danger text-light">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let movimiento of movimientos;let i = index">
+                    <td>{{ movimiento.id }}</td>
+                    <td>{{ nombres[i]}}</td>
+                    <td>{{ movimiento.cantidad }}</td>
+                    <td>{{ movimiento.tipo }}</td>
+                    <td>{{ movimiento.estado }}</td>
+                    <td>{{ movimiento.fecha | date }}</td>
+                    <td>{{ movimiento.motivo }}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" (click)="openEliminar(movimiento)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-success" (click)="openModalRegistrar()">Registrar Movimiento</button>
+    </div>
+</div>

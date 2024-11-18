@@ -1,0 +1,138 @@
+<div class="dashboard">
+    <!-- Mensaje de Error -->
+
+    <!-- Mensajes de éxito -->
+    <div *ngIf="showSuccessMessage" class="alert alert-success">
+        <strong>{{ successMessage }}</strong>
+    </div>
+
+    <!-- Alerta de Confirmación de Eliminación -->
+    <div *ngIf="showDeleteAlert" class="alert alert-danger">
+        <strong>¡Atención!</strong> ¿Estás seguro de que deseas eliminar el producto
+        <strong>{{ selectedProducto?.descripcion }}</strong>?
+        <div class="mt-2">
+            <button class="btn btn-danger btn-sm" (click)="confirmDelete()">Eliminar</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelDelete()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Registro/Edición -->
+    <div *ngIf="showRegistrarNuevo" class="modal-registrar">
+        <form class="Formu-Registrar alert alert-primary" (ngSubmit)="save()">
+            <h4 class="text-center mb-4">
+                {{ isEditMode ? 'Editar Producto' : 'Registrar Nuevo Producto' }}
+            </h4>
+
+            <!-- Nombre -->
+            <div class="form-group">
+                <label for="inputNombre">Nombre</label>
+                <input type="text" class="form-control" id="inputNombre" [(ngModel)]="producto.nombre" name="nombre"
+                    placeholder="Ingresa el nombre del producto" required />
+            </div>
+
+            <!-- Descripción -->
+            <div class="form-group">
+                <label for="inputDescripcion">Descripción</label>
+                <input type="text" class="form-control" id="inputDescripcion" [(ngModel)]="producto.descripcion"
+                    name="descripcion" placeholder="Ingresa la descripción del producto" required />
+            </div>
+
+            <!-- Precio -->
+            <div class="form-group">
+                <label for="inputPrecio">Precio</label>
+                <input type="number" class="form-control" id="inputPrecio" [(ngModel)]="producto.precio" name="precio"
+                       placeholder="Ingresa el precio del producto" required />
+            </div>
+            
+
+            <!-- Stock -->
+            <div class="form-group">
+                <label for="inputStock">Stock</label>
+                <input type="number" class="form-control" id="inputStock" [(ngModel)]="producto.stock" name="stock"
+                    placeholder="Ingresa el stock del producto" required />
+            </div>
+
+            <!-- Categoría -->
+            <div class="form-group">
+                <label for="selectCategoria">Categoría</label>
+                <select class="form-control" id="selectCategoria" [(ngModel)]="producto.categoria_id"
+                    name="categoria_id" required>
+                    <option value="" disabled *ngIf="!isEditMode" selected>
+                        Selecciona un estado
+                    </option>
+                    <option *ngFor="let categoria of categorias" [value]="categoria.id">
+                        {{ categoria.nombre }}
+                    </option>
+                </select>
+            </div>
+
+
+            <!-- Estado -->
+            <div class="form-group">
+                <label for="selectEstado">Estado</label>
+                <select class="form-control" id="selectEstado" [(ngModel)]="producto.activo" name="activo"
+                    [disabled]="!isEditMode" (ngModelChange)="producto.activo = $event === 'true'">
+                    <option value="" disabled *ngIf="!isEditMode" selected>
+                        Selecciona un estado
+                    </option>
+                    <option [value]="true">Activo</option>
+                    <option [value]="false">Inactivo</option>
+                </select>
+            </div>
+
+
+            <!-- Botones -->
+            <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-primary">
+                    {{ isEditMode ? 'Actualizar Producto' : 'Registrar Producto' }}
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="closeRegistrarNuevo()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <app-dashboard></app-dashboard>
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <app-profile></app-profile>
+        <div class="imgDestacada">
+            <img src="https://plus.unsplash.com/premium_photo-1661672252052-afdd6cc80fff?fm=jpg&q=60&w=3000" alt="" />
+        </div>
+        <div class="content">
+            <h3>Gestión de Productos</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="bg bg-danger text-light">ID</th>
+                        <th class="bg bg-danger text-light">Nombre</th>
+                        <th class="bg bg-danger text-light">Descripción</th>
+                        <th class="bg bg-danger text-light">Precio</th>
+                        <th class="bg bg-danger text-light">Stock</th>
+                        <th class="bg bg-danger text-light">Categoría</th>
+                        <th class="bg bg-danger text-light">Estado</th>
+                        <th class="bg bg-danger text-light">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of productos">
+                        <td>{{ producto.id }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.descripcion }}</td>
+                        <td>{{ producto.precio }}</td>
+                        <td>{{ producto.stock }}</td>
+                        <td>{{ getCategoriaNombre(producto.categoria_id) }}</td>
+                        <td>
+                            <span [ngClass]="producto.activo ? 'btn btn-success' : 'btn btn-danger'">
+                                {{ producto.activo ? 'Activo' : 'Inactivo' }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning" (click)="openEditModal(producto)">Editar</button>
+                            <button class="btn btn-danger" (click)="openEliminar(producto)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success" (click)="openModalRegistrar()">Registrar Producto</button>
+        </div>
+    </div>
+</div>

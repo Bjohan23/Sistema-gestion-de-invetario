@@ -1,0 +1,100 @@
+<div class="dashboard">
+    <!-- Mensajes de éxito -->
+    <div *ngIf="showSuccessMessage" class="alert alert-success">
+      <strong>{{ successMessage }}</strong>
+    </div>
+  
+    <!-- Alerta de Confirmación de Eliminación -->
+    <div *ngIf="showDeleteAlert" class="alert alert-danger">
+      <strong>¡Atención!</strong> ¿Estás seguro de que deseas eliminar la categoría
+      <strong>{{ selectedCategoria?.nombre }}</strong>?
+      <div class="mt-2">
+        <button class="btn btn-danger btn-sm" (click)="confirmDelete()">Eliminar</button>
+        <button class="btn btn-secondary btn-sm" (click)="cancelDelete()">Cancelar</button>
+      </div>
+    </div>
+  
+    <!-- Modal de Registro/Edición -->
+    <div *ngIf="showRegistrarNuevo" class="modal-registrar">
+      <form class="Formu-Registrar alert alert-primary" (ngSubmit)="save()">
+        <h4 class="text-center mb-4">
+          {{ isEditMode ? 'Editar Categoría' : 'Registrar Nueva Categoría' }}
+        </h4>
+  
+        <!-- Nombre -->
+        <div class="form-group">
+          <label for="inputNombre">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputNombre"
+            [(ngModel)]="categoria.nombre"
+            name="nombre"
+            placeholder="Ingresa el nombre de la categoría"
+            required
+          />
+        </div>
+  
+        <!-- Descripción -->
+        <div class="form-group">
+          <label for="inputDescripcion">Descripción</label>
+          <textarea
+            class="form-control"
+            id="inputDescripcion"
+            [(ngModel)]="categoria.descripcion"
+            name="descripcion"
+            placeholder="Ingresa la descripción"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+  
+        <!-- Botones -->
+        <div class="d-flex justify-content-between mt-4">
+          <button type="submit" class="btn btn-primary">
+            {{ isEditMode ? 'Actualizar Categoría' : 'Registrar Categoría' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="closeRegistrarNuevo()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+    <app-dashboard></app-dashboard>
+    <div class="main-content">
+        <app-profile></app-profile>
+        <div class="imgDestacada">
+    
+          <img
+            src="https://plus.unsplash.com/premium_photo-1661672252052-afdd6cc80fff?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW5kdXN0cmlhbCUyMHNhZmV0eXxlbnwwfHwwfHx8MA%3D%3D"
+            alt="">
+        </div>
+        <div class="content">
+          <h3>Gestión de Categorías</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="bg bg-danger text-light">ID</th>
+                <th class="bg bg-danger text-light">Nombre</th>
+                <th class="bg bg-danger text-light">Descripción</th>
+                <th class="bg bg-danger text-light">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let categoria of categorias">
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.nombre }}</td>
+                <td>{{ categoria.descripcion }}</td>
+                <td>
+                  <button class="btn btn-warning" (click)="openEditModal(categoria)">Editar</button>
+                  <button class="btn btn-danger" (click)="openEliminar(categoria)">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      
+     
+          <button class="btn btn-success" (click)="openModalRegistrar()">Registrar Categoría</button>
+        </div> 
+    </div>
+    <!-- Tabla de categorías -->
+  </div>
+  

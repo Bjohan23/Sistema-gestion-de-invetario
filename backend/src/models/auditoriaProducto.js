@@ -42,7 +42,10 @@ const AuditoriaProducto = sequelize.define('AuditoriaProducto', {
     timestamps: false
 });
 
-AuditoriaProducto.belongsTo(Producto, { foreignKey: 'producto_id' });
+AuditoriaProducto.belongsTo(Producto, {
+    foreignKey: 'producto_id',
+    onDelete: 'CASCADE'  // Esto asegura que cuando un producto se elimine, los registros relacionados en AuditoriaProducto también se eliminen
+});
 AuditoriaProducto.belongsTo(Usuario, { foreignKey: 'usuario_id' });
 
 module.exports = AuditoriaProducto;

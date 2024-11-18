@@ -1,0 +1,45 @@
+<div class="dashboard">
+    <!-- Barra lateral de navegación -->
+    <app-dashboard></app-dashboard>
+  
+    <!-- Contenedor principal -->
+    <div class="main-content">
+      <app-profile></app-profile>
+      <div class="imgDestacada">
+        <img
+          src="https://plus.unsplash.com/premium_photo-1661672252052-afdd6cc80fff?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW5kdXN0cmlhbCUyMHNhZmV0eXxlbnwwfHwwfHx8MA%3D%3D"
+          alt="">
+      </div>
+  
+      <!-- Aquí va el contenido de la página seleccionada -->
+      <div class="content">
+        <h3>Gestión de Usuarios</h3>
+  
+        <!-- Tabla de usuarios -->
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Acción</th>
+                <th>Fecha</th>
+                <th>Detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let auditoria of auditoriaProductos">
+                <td>{{ auditoria.id }}</td>
+                <td>{{ auditoria.Producto.nombre }}</td>
+                <td>{{ auditoria.accion }}</td>
+                <td>{{ auditoria.fecha }}</td>
+                <td>{{ auditoria.detalles }}</td>
+              </tr>
+            </tbody>
+          </table>
+        
+  
+
+      </div>
+    </div>
+  </div>
+      

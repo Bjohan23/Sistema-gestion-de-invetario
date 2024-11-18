@@ -10,6 +10,7 @@ export class LoginService {
   private tokenkey = 'authToken';
   private rolkey = 'authRol';
   private userkey = 'authUser';
+  private iduser = 'authIdUser';
   constructor(private http: HttpClient, private router: Router) { }
 
     login(username: string, password: string): Observable<any>{
@@ -17,7 +18,7 @@ export class LoginService {
       return this.http.post(`${this.baseUrl}`, loginData);
     }
 
-
+        
     setToken(token: string) {
       if (typeof window !== 'undefined') {
         localStorage.setItem(this.tokenkey, token);

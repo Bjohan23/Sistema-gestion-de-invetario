@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms'; 
-import { UsuarioService } from '../../services/usuario.service';
+import { UsuarioService } from '../../services/usuarios.service';
 import { Usuario } from '../../models/usuario';
 @Component({
   selector: 'app-registrer',
@@ -12,6 +12,7 @@ import { Usuario } from '../../models/usuario';
   styleUrl: './registrer.component.css'
 })
 export class RegistrerComponent {
+  showPassword: boolean = false;
   errorMessage: string = '';
   Usuario: Usuario = new Usuario();
   submitted = false;
@@ -24,9 +25,10 @@ export class RegistrerComponent {
   goToRegister() {
     this.router.navigate(['/login']);  // Corregí la ruta a '/register'
   }
- ngOnInit() {
-  }  
-  
+
+  togglePassword() {
+    this.showPassword = !this.showPassword; // Cambia el estado de showPassword
+  }
   save() {
     if (!this.Usuario.username || !this.Usuario.password || !this.Usuario.rol) {
       this.errorMessage = 'Todos los campos son obligatorios';

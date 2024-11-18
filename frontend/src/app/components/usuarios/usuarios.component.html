@@ -1,116 +1,217 @@
 <div class="dashboard">
-    <!-- Barra lateral de navegación -->
-    <app-dashboard></app-dashboard>
+  <div *ngIf="showAlertEliminarUserAct" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>¡Atención!</strong> Procederas a Eliminar Cuenta, ¿Estás Seguro de hacerlo?
+    <div class="mt-2">
+      <button class="btn btn-danger btn-sm" (click)="confirmDelete()">Si</button>
+      <button class="btn btn-secondary btn-sm" (click)="cancelDeleteUserAc()">Cancelar</button>
+    </div>
+    <button type="button" class="btn-close" (click)="cancelDeleteUserAc()" aria-label="Close"></button>
+  </div>
+  
+  <div *ngIf="showSuccesRegistrer" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>ATENCION!</strong> <br>USUARIO CORRECTAMENTE ACTUALIZADO
+    <button type="button" class="btn-close" (click)="aceptarRegistro()" aria-label="Close"></button>
+  </div>
 
-    <!-- Contenedor principal -->
-    <div class="main-content">
-        <header>
-            <div class="profile">
-                <div class="profile-box">
-                    <div class="profile-icon">👤</div>
-                    <!-- Mostrar el valor del usuario desde localStorage -->
-                    <div class="profile-name">{{ authUser }}</div>
-                    <button class="logout-btn" (click)="logout()">Cerrar</button>
-                </div>
-            </div>
-        </header>
-        
+  <div *ngIf="showSuccesUpdate" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>ATENCION!</strong> <br>USUARIO CORRECTAMENTE REGISTRADO
+    <button type="button" class="btn-close" (click)="aceptarUpdate()" aria-label="Close"></button>
+  </div>
+  <!-- Alerta de Confirmación de Eliminación -->
+  <div *ngIf="showDeleteAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>¡Atención!</strong> ¿Estás seguro de que deseas eliminar al usuario
+    <strong>{{ selectedUser?.username }}</strong>?
+    <div class="mt-2">
+      <button class="btn btn-danger btn-sm" (click)="confirmDelete()">Eliminar</button>
+      <button class="btn btn-secondary btn-sm" (click)="cancelDelete()">Cancelar</button>
+    </div>
+    <button type="button" class="btn-close" (click)="cancelDelete()" aria-label="Close"></button>
+  </div>
 
-        <!-- Aquí va el contenido de la página seleccionada -->
-        <div class="content">
-            <h3>Gestión de Usuarios</h3>
-      
-            <!-- Tabla de usuarios -->
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre de Usuario</th>
-                  <th>Estado</th>
-                  <th>Rol</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let user of users">
-                  <td>{{ user.id }}</td>
-                  <td>{{ user.username }}</td>
-                  <td>{{ user.activo ? 'Activo' : 'Inactivo' }}</td>
-                  <td>{{ user.rol }}</td>
-                  <td>
-                    <button class="btn btn-warning" (click)="openEditModal(user)">Editar</button>
-                   
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-      
-            <!-- Botón para registrar un nuevo usuario -->
-            <button class="btn btn-primary" (click)="openModal()">Registrar Usuario</button>
-            <div *ngIf="showEditModal" class="modal" tabindex="-1" role="dialog" style="display: block;">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Editar Usuario</h5>
-                      <button type="button" class="close" (click)="closeEditModal()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="inputBox">
-                        <input [(ngModel)]="Usuario.username" name="username" required />
-                        <i>Username</i>
-                      </div>
-                      <div class="inputBox">
-                        <select [(ngModel)]="Usuario.rol" name="rol" required>
-                          <option value="" disabled selected>Seleccionar Rol</option>
-                          <option value="Encargado Almacen">Encargado Almacén</option>
-                          <option value="Administrador">Administrador</option>
-                        </select>
-                        <i>Rol</i>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" (click)="updateUser()">Guardar</button>
-                      <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancelar</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <!-- Modal para registrar usuario -->
-            <div *ngIf="showModal" class="modal">
-              <div class="modal-content">
-                <span class="close" (click)="closeModal()">&times;</span>
-                <h4>Registrar Nuevo Usuario</h4>
-                <form (ngSubmit)="onSubmit()">
-                  <div class="inputBox">
-                    <input type="text" [(ngModel)]="Usuario.username" name="username" required placeholder="Nombre de usuario">
-                    <i>Nombre de Usuario</i>
-                  </div>
-      
-                  <div class="inputBox">
-                    <input type="password" [(ngModel)]="Usuario.password" name="password" required placeholder="Contraseña">
-                    <i>Contraseña</i>
-                  </div>
-      
-                  <div class="inputBox">
-                    <select required [(ngModel)]="Usuario.rol" name="rol">
-                      <option value="" disabled selected>Seleccionar Rol</option>
-                      <option value="Encargado Almacén">Encargado Almacén</option>
-                      <option value="Administrador">Administrador</option>
-                    </select>
-                    <i>Rol</i>
-                  </div>
-      
-                  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-      
-                  <button type="submit" class="btn btn-success">Registrar</button>
-                </form>
-              </div>
+    <div *ngIf="showRegistrarNuevo" class="modal-registrar ">
+      <form class="Formu-Registrar alert alert-primary" (ngSubmit)="save()">
+        <h4 class="text-center mb-4 ">{{ isEditMode ? 'Editar Usuario' : 'Registrar Nuevo Usuario' }}</h4>
+        <!-- Usuario -->
+        <div class="form-group">
+          <label for="inputUsername">Nombre de Usuario</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputUsername"
+            [(ngModel)]="user.username"
+            name="username"
+            placeholder="Ingresa el nombre de usuario"
+            required
+          />
+        </div>
+    
+        <!-- Contraseña -->
+        <div class="form-group">
+          <label for="inputPassword">{{ isEditMode ? 'Ingresar Contraseña Nueva' : 'Contraseña' }}</label>
+          <div class="input-group">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control"
+              id="inputPassword"
+              [(ngModel)]="user.password"
+              name="password"
+              placeholder="Ingresa la contraseña"
+              required
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="togglePassword()"
+                aria-label="Toggle password visibility"
+              >
+                <i [ngClass]="showPassword ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"></i>
+              </button>
             </div>
           </div>
         </div>
-        
-        
+  
+      <!-- Roles -->
+      <div class="form-group">
+        <label for="selectRoles">Rol</label>
+        <select
+          class="form-control"
+          id="selectRoles"
+          [(ngModel)]="user.rol"
+          name="rol"
+          required
+        >
+          <option value="" disabled selected>Selecciona un rol</option>
+          <option value="Administrador">Administrador</option>
+          <option value="Encargado Almacen">Encargado Almacén</option>
+        </select>
+      </div>
+  
+      <!-- Botones -->
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-primary">
+          {{ isEditMode ? 'Actualizar Usuario' : 'Registrar Usuario' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="closeRegistrarNuevo()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+     <div *ngIf="showRegistrarNuevo" class="modal-registrar ">
+      <form class="Formu-Registrar alert alert-primary" (ngSubmit)="save()">
+        <h4 class="text-center mb-4 ">{{ isEditMode ? 'Editar Usuario' : 'Registrar Nuevo Usuario' }}</h4>
+        <!-- Usuario -->
+        <div class="form-group">
+          <label for="inputUsername">Nombre de Usuario</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputUsername"
+            [(ngModel)]="user.username"
+            name="username"
+            placeholder="Ingresa el nombre de usuario"
+            required
+          />
+        </div>
+    
+        <!-- Contraseña -->
+        <div class="form-group">
+          <label for="inputPassword">{{ isEditMode ? 'Ingresar Contraseña Nueva' : 'Contraseña' }}</label>
+          <div class="input-group">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control"
+              id="inputPassword"
+              [(ngModel)]="user.password"
+              name="password"
+              placeholder="Ingresa la contraseña"
+              required
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="togglePassword()"
+                aria-label="Toggle password visibility"
+              >
+                <i [ngClass]="showPassword ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+  
+      <!-- Roles -->
+      <div class="form-group">
+        <label for="selectRoles">Rol</label>
+        <select
+          class="form-control"
+          id="selectRoles"
+          [(ngModel)]="user.rol"
+          name="rol"
+          required
+        >
+          <option value="" disabled selected>Selecciona un rol</option>
+          <option value="Administrador">Administrador</option>
+          <option value="Encargado Almacen">Encargado Almacén</option>
+        </select>
+      </div>
+  
+      <!-- Botones -->
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-primary">
+          {{ isEditMode ? 'Actualizar Usuario' : 'Registrar Usuario' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="closeRegistrarNuevo()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  <!-- Barra lateral de navegación -->
+  <app-dashboard></app-dashboard>
+
+  <!-- Contenedor principal -->
+  <div class="main-content">
+    <app-profile></app-profile>
+    <div class="imgDestacada">
+
+      <img
+        src="https://plus.unsplash.com/premium_photo-1661672252052-afdd6cc80fff?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW5kdXN0cmlhbCUyMHNhZmV0eXxlbnwwfHwwfHx8MA%3D%3D"
+        alt="">
+    </div>
+
+    <!-- Aquí va el contenido de la página seleccionada -->
+    <div class="content">
+      <h3>Gestión de Usuarios</h3>
+
+      <!-- Tabla de usuarios -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="bg bg-danger text-light">ID</th>
+            <th class="bg bg-danger text-light">Nombre de Usuario</th>
+            <th class="bg bg-danger text-light">Estado</th>
+            <th class="bg bg-danger text-light">Rol</th>
+            <th class="bg bg-danger text-light">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of usuarios">
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.activo ? 'Activo' : 'Inactivo' }}</td>
+            <td>{{ user.rol }}</td>
+            <td>
+              <button class="btn btn-warning" (click)="openEditModal(user)">Editar</button>
+              <button class="btn btn-danger" (click)="openEliminar(user)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Botón para registrar un nuevo usuario -->
+      <button class="btn btn-success" (click)="openModalRegistrar()">Registrar Usuario</button>
+
+    </div>
+  </div>
+
+
 
 </div>
