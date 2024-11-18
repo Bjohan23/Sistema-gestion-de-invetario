@@ -13,7 +13,7 @@
                 
                 <img src="https://plus.unsplash.com/premium_photo-1661674192497-e124e919e69c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW52ZW50b3J5fGVufDB8fDB8fHww" alt="">
             </div>
-            <h1>Bienvenido a la Gestión de Inventario</h1>
+            <h3>Bienvenido a la Gestión de Inventario</h3   >
             <div class="button-container">
                 <button (click)="gotoUsuario()"  *ngIf="role === 'Administrador'" class="button02" >
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,8 +21,15 @@
                     </svg>
                     Gestión Usuario
                 </button>
-        
-                <button class="button02">
+                <button class="button-reporte">
+
+                    <!-- Mostrar información del reporte después de cargar -->
+                    <div class="report-summary" *ngIf="reporteCargado">
+                      <p>Total Productos: <strong>{{ reporte?.total_productos }}</strong></p>
+                      <p>Valor Total: <strong>{{ reporte?.valor_total | currency }}</strong></p>
+                    </div>
+                  </button>
+                <button (click)="gotoProductos()" class="button02">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 6H2V4h16v2zM2 10h16v2H2v-2zM2 14h16v2H2v-2z" fill="#ffffff"/>
                     </svg>
@@ -36,7 +43,7 @@
                     Gestión Categoría
                 </button>
         
-                <button  class="button02"  routerLink="/gestion-movimientos" routerLinkActive="active">
+                <button (click)="gotoMovimientos()"  class="button02"  routerLink="/gestion-movimientos" routerLinkActive="active">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 15l7-7-7-7" fill="none" stroke="#ffffff" stroke-width="2"/>
                     </svg>

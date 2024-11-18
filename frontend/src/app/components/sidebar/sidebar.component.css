@@ -9,7 +9,13 @@
     padding: 20px;
 }
 
-
+h3{
+    background-color: #6700ee;
+    font-size: 30px;
+    padding: 10px 10px;
+    color: aliceblue;
+    font-weight: 900;
+  }
 
 .content h1 {
     font-size: 30px;

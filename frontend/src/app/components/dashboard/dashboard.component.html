@@ -4,7 +4,7 @@
       <li *ngIf="role === 'Administrador'"[class.active]="isActive('/gestion-usuario')"><a (click)="gotoAdonde('/gestion-usuario')" >Gestión Usuario</a></li>
       <li [class.active]="isActive('/categorias')"><a (click)="gotoAdonde('/categorias')">Gestión Categorias</a></li>
       <li [class.active]="isActive('/productos')"><a (click)="gotoAdonde('/productos')">Gestión Productos</a></li>
-      <li [class.active]="isActive('/movimientos')"><a (click)="gotoAdonde('/movimientos')">Gestión Movimientos</a></li>
+      <li [class.active]="isActive('/movimiento')"><a (click)="gotoAdonde('/movimiento')">Gestión Movimientos</a></li>
       <li *ngIf="role === 'Administrador'" [class.active]="isActive('/auditoria')"><a (click)="gotoAdonde('/auditoria')">Gestión Auditoria</a></li>
 
     </ul>

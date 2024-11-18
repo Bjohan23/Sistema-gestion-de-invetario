@@ -9,21 +9,21 @@ import { Producto } from '../models/producto';
 })
 export class ProductosService {
 
-  private baseUrl = 'http://localhost:3000/v1/api/productos'; // URL base para los productos
+    private baseUrl = 'http://localhost:3000/v1/api/productos'; // URL base para los productos
 
-  constructor(
-    private http: HttpClient,
-    private loginService: LoginService,
-    private router: Router
-  ) {}
+    constructor(
+      private http: HttpClient,
+      private loginService: LoginService,
+      private router: Router
+    ) {}
 
-  // Obtener todos los productos
-  getAllProducts(): Observable<any> {
-    const headers = this.getAuthHeaders();
-    if (!headers) return new Observable(); // Retorna un observable vacío si no hay token
+    // Obtener todos los productos
+    getAllProducts(): Observable<any> {
+      const headers = this.getAuthHeaders();
+      if (!headers) return new Observable(); // Retorna un observable vacío si no hay token
 
-    return this.http.get(`${this.baseUrl}`, { headers });
-  }
+      return this.http.get(`${this.baseUrl}`, { headers });
+    }
 
   // Obtener un producto por ID
   getProductById(id: number): Observable<any> {

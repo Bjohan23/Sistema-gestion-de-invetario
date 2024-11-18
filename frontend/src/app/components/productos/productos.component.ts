@@ -10,8 +10,9 @@ import { ProductosService } from '../../services/productos.service';
 import { CategoriasService } from '../../services/categorias.service';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
-import { UsuarioService } from '../../services/usuario.service';
-
+import { MovimientosInventario } from '../../models/MovimientosInventario';
+import { MovimientoProductosService } from '../../services/movimiento-productos.service';
+import { UsuarioService } from '../../services/usuarios.service';
 import { AuditoriaProducto } from '../../models/AuditoriaProducto';
 import { AuditorioProductosService } from '../../services/auditorio-productos.service';
 @Component({
@@ -34,19 +35,26 @@ export class ProductosComponent {
   successMessage: string = ''; // Mensaje dinámico de éxito
   numero: number = 0;
   usuario: Usuario[] = [];
+  dataProducto: number = 0; 
+  showErrorMessage: boolean = false;
+  movimientoProductoModel: MovimientosInventario = new MovimientosInventario();
+  movimientoProdList: MovimientosInventario[] = [];
   constructor(
     private productosService: ProductosService,
     private categoriasService: CategoriasService,
     private auditoria: AuditorioProductosService,
     private loginService: LoginService,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private servicioMovPro: MovimientoProductosService
   ) { }
 
   ngOnInit(): void {
     this.getProductos(); // Cargar la lista de productos al iniciar
     this.getCategorias(); // Cargar la lista de categorías para el select
+   
   }
+
 
   // Obtener todos los productos
   getProductos(): void {
@@ -95,12 +103,14 @@ export class ProductosComponent {
 
   // Guardar o actualizar un producto
   save(): void {
+      // Verificar si todos los campos requeridos están llenos
+
     if (this.isEditMode) {
       console.log('PR AC', this.producto);
       this.auditorias.accion = 'Actualizar';
       this.auditorias.detalles = 'Se Realizo Actualización a Productos';
       this.auditorias.producto_id = this.producto.id;
-  
+ 
       // Primero actualizar el producto
       this.productosService.updateProduct(this.producto.id, this.producto).subscribe({
         next: () => {
@@ -135,7 +145,7 @@ export class ProductosComponent {
     } else {
       // Registrar nuevo producto
       this.auditorias.accion = 'Registrar';
-      this.auditorias.detalles = "Se Realizo Registro de Productos";  // Asegúrate que este detalle se asigna correctamente
+      this.auditorias.detalles = "Se Realizó Registro de Productos"; // Asegúrate que este detalle se asigna correctamente
       
       // Obtener lista de empleados y asignar usuario_id
       this.usuarioService.getEmployeesList().subscribe((response: any) => {
@@ -153,14 +163,45 @@ export class ProductosComponent {
               next: (response) => {
                 // Asignar el producto_id desde la respuesta del servidor
                 this.auditorias.producto_id = response.data.id;
-                console.log('AUDITORIA', this.auditorias);
+                console.log('AUDITORIA:', this.auditorias);
+  
+                // Asignar ID del producto a dataProducto
+                this.dataProducto = response.data.id;
+                console.log('ID del producto registrado:', this.dataProducto);
   
                 // Crear auditoría del producto
                 this.auditoria.createAuditoriaProducto(this.auditorias).subscribe(() => {
                   // Actualizar lista de productos
-                  this.getProductos(); // Actualizar la lista
+              
+                  // Ahora crear el movimiento de inventario
+                  this.movimientoProductoModel = {
+                    id: 0, // El ID lo asigna el servidor
+                    producto_id: this.dataProducto, // Asegúrate que el ID del producto esté correcto
+                    cantidad: this.producto.stock, // Asegúrate que 'stock' es la propiedad que contiene la cantidad
+                    tipo: 'Ingreso',
+                    estado: 'Realizado',
+                    fecha: new Date(),
+                    motivo: 'Registro de producto'
+                  };
+                  
+                  this.getProductos();
                   this.showSuccess('Producto registrado con éxito');
                   this.closeRegistrarNuevo();
+  
+                  console.log('Movimiento de inventario:', this.movimientoProductoModel);
+  
+                  // Crear movimiento de inventario
+                  this.servicioMovPro.createMovimiento(this.movimientoProductoModel).subscribe({
+                    next: () => {
+                      // Actualizar lista de productos
+                      this.getProductos();
+                      this.showSuccess('Producto registrado con éxito y movimiento de inventario creado');
+                      this.closeRegistrarNuevo();
+                    },
+                    error: (error) => {
+                      console.error('Error al registrar movimiento de inventario:', error);
+                    }
+                  });
                 });
               },
               error: (error) => {
@@ -172,10 +213,6 @@ export class ProductosComponent {
           console.error('Error en la respuesta:', response);
         }
       });
-  
-      // Limpiar los datos de la auditoría después de realizar todo
-      // **Aquí es importante que no reinicies `this.auditorias` antes de tiempo**
-      //this.auditorias = new AuditoriaProducto(); // Deja esto fuera para evitar perder los datos antes de completar
     }
   }
   

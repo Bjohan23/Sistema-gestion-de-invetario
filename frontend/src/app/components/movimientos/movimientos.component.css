@@ -1,38 +1,4 @@
-
-.alert {
-    position: fixed;
-    top: 50%; /* Centra verticalmente */
-    left: 50%; /* Centra horizontalmente */
-    transform: translate(-50%, -50%); /* Ajusta la posición para que quede perfectamente centrada */
-    z-index: 9999;
-    width: auto;
-    max-width: 400px;
-    text-align: center; /* Centrar el texto y botones */
-  }
-  
-  .alert .btn {
-    margin: 5px;
-  }
-  
-  
-  .modal-registrar{
-    position: fixed;
-    top: 50%; /* Centra verticalmente */
-    left: 50%; /* Centra horizontalmente */
-    transform: translate(-50%, -50%); /* Ajusta la posición para que quede perfectamente centrada */
-    z-index: 1050;
-    width: 100%;
-    height: 100%;
-    background: #000000c9;
-  }
-  
-  .Formu-Registrar{
-    min-width: 350px;
-    height: 500px;
-    text-align: start;
-  }
-
-  .dashboard {
+.dashboard {
     width: 100%;
   
     display: flex;
@@ -68,7 +34,9 @@
     /* Centra la imagen */
   }
   
-
+  
+  
+  
   .main-content {
     flex-grow: 1;
     padding: 20px;
@@ -80,4 +48,36 @@
       height: 100%;
     }
   
+  }
+  .alert {
+    position: fixed;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta la posición para que quede perfectamente centrada */
+    z-index: 1050;
+    width: auto;
+    max-width: 400px;
+    text-align: center; /* Centrar el texto y botones */
+  }
+  
+  .alert .btn {
+    margin: 5px;
+  }
+  
+  
+  .modal-registrar{
+    position: fixed;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta la posición para que quede perfectamente centrada */
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: #000000c9;
+  }
+  
+  .Formu-Registrar{
+    min-width: 350px;
+    height: 600px;
+    text-align: start;
   }

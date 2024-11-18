@@ -4,7 +4,7 @@
   import { FormsModule } from '@angular/forms'; 
   import { Router } from '@angular/router';
   import { CommonModule } from '@angular/common'; 
-  import { UsuarioService } from '../../services/usuario.service';
+  import { UsuarioService } from '../../services/usuarios.service';
   import { DashboardComponent } from '../dashboard/dashboard.component';
   import { ProfileComponent } from '../profile/profile.component';
   @Component({

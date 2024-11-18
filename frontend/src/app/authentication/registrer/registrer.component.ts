@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms'; 
-import { UsuarioService } from '../../services/usuario.service';
+import { UsuarioService } from '../../services/usuarios.service';
 import { Usuario } from '../../models/usuario';
 @Component({
   selector: 'app-registrer',
