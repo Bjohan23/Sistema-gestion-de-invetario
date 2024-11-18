@@ -40,5 +40,9 @@ const MovimientosInventario = sequelize.define('MovimientosInventario', {
     timestamps: false
 });
 // definir la relacion con un alias 
-MovimientosInventario.belongsTo(Producto, { foreignKey: 'producto_id', as: 'Producto' });
+MovimientosInventario.belongsTo(Producto, { 
+    foreignKey: 'producto_id', 
+    as: 'Producto',
+    onDelete: 'CASCADE' // Esto asegurará que los registros de movimientos_inventario se eliminen si el producto es eliminado
+});
 module.exports = MovimientosInventario;
